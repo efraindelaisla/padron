@@ -1,0 +1,29 @@
+export interface Canasto {
+  PROGRESIVO?: number;
+  PROGRAMA: string;
+  VERTIENTE: string;
+  PRIMER_APELLIDO: string;
+  SEGUNDO_APELLIDO: string;
+  NOMBRE: string;
+  CALLE: string;
+  NUM_EXT: string;
+  NUM_INT: string;
+  LOCALIDAD: string;
+  MUNICIPIO: string;
+  CURP: string;
+  EDAD: string;
+  SEXO: string;
+  FOLIO_RELACIONADO: string;
+  CANT_APOYOS_RECIBIDOS: string;
+  COSTO_UNITARIO: string;
+  PRIMERA_ENTREGA: string;
+  FT_01: string;
+  SEGUNDA_ENTREGA: string;
+  FT_02: string;
+  TERCERA_ENTREGA: string;
+  FT_03: string;
+  CUARTA_ENTREGA: string;
+  FT_04: string;
+  CODIGO_POSTAL: string;
+  COLONIA: string;
+}

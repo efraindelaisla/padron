@@ -1,0 +1,193 @@
+<form>
+  <div class="form-group">
+    <select [(ngModel)]="municipio" name="municipio" (change)="onMunicipioChange()" class="form-select"
+      aria-label="Default select example">
+      <label for="Municipio">MUNICIPIO</label>
+      <option selected>Selecciona una opcion</option>
+      <option *ngFor="let municipio of lstMunicipio">{{municipio}}</option>
+    </select>
+  </div>
+  <!-- <div class="form-group">
+    <input type="searchText" name="filter" placeholder="Buscar por apellido paterno o CURP" class="form-control" [(ngModel)]=
+    "filter">
+</div>
+ <div class="form-group">
+    <input type="searchText" name="filterm" placeholder="Buscar por apellido materno o Folio Relacionado" class="form-control" [(ngModel)]=
+    "filterm">
+</div> -->
+</form>
+<hr>
+
+<div class="page-header" style="color: rgb(0, 0, 0);">
+  <h1>BENEFICIARIOS: CANASTA</h1>
+</div>
+<hr style="background-color: white;">
+<div *ngIf="!ban">
+
+
+  <span class="float-right">
+    <span class="material-icons search-icon">
+
+    </span>
+    <input (keyup)="applyFilter($event)" placeholder="BUSCAR" class="search-form-field"
+      [(ngModel)]="myFilterValue">
+    <span class="btn btn-danger material-icons search-clear-icon" (click)="resetFilter($event)">
+      close
+    </span>
+  </span>
+  <table mat-table class="table table-bordered" [dataSource]="dataSource" class="mat-elevation-z8" sort>
+
+    <ng-container matColumnDef="PROGRESIVO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> No. </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.PROGRESIVO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="PROGRAMA">
+      <th mat-header-cell *matHeaderCellDef scope="col"> PROGRAMA </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.PROGRAMA}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="VERTIENTE">
+      <th mat-header-cell *matHeaderCellDef scope="col"> VERTIENTE </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.VERTIENTE}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="PRIMER_APELLIDO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> PRIMER_APELLIDO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.PRIMER_APELLIDO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SEGUNDO_APELLIDO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> SEGUNDO_APELLIDO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.SEGUNDO_APELLIDO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NOMBRE">
+      <th mat-header-cell *matHeaderCellDef scope="col"> NOMBRE </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.NOMBRE}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="CALLE">
+      <th mat-header-cell *matHeaderCellDef scope="col"> CALLE </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.CALLE}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NUM_EXT">
+      <th mat-header-cell *matHeaderCellDef scope="col"> NUM_EXT </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.NUM_EXT}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NUM_INT">
+      <th mat-header-cell *matHeaderCellDef scope="col"> NUM_INT </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.NUM_INT}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="LOCALIDAD">
+      <th mat-header-cell *matHeaderCellDef scope="col"> LOCALIDAD </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.LOCALIDAD}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MUNICIPIO" scope="row">
+      <th mat-header-cell *matHeaderCellDef  style="width:max-content;"> MUNICIPIO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.MUNICIPIO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CURP" scope="col">
+      <th mat-header-cell *matHeaderCellDef style="width:max-content;"> CURP </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.CURP}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="EDAD">
+      <th mat-header-cell *matHeaderCellDef scope="col"> EDAD </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.EDAD}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SEXO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> SEXO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.SEXO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FOLIO_RELACIONADO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> FOLIO_RELACIONADO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.FOLIO_RELACIONADO}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="CANT_APOYOS_RECIBIDOS">
+      <th mat-header-cell *matHeaderCellDef scope="col"> CANTIDAD DE APOYOS RECIBIDOS </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.CANT_APOYOS_RECIBIDOS}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="COSTO_UNITARIO">
+      <th mat-header-cell *matHeaderCellDef scope="col"> COSTO_UNITARIO </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.COSTO_UNITARIO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="PRIMERA_ENTREGA">
+      <th mat-header-cell *matHeaderCellDef scope="col"> PRIMERA_ENTREGA </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.PRIMERA_ENTREGA}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FT_01">
+      <th mat-header-cell *matHeaderCellDef scope="col"> FT_01 </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.FT_01}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SEGUNDA_ENTREGA">
+      <th mat-header-cell *matHeaderCellDef scope="col"> SEGUNDA_ENTREGA </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.SEGUNDA_ENTREGA}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FT_02">
+      <th mat-header-cell *matHeaderCellDef scope="col"> FT_02 </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.FT_02}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TERCERA_ENTREGA">
+      <th mat-header-cell *matHeaderCellDef scope="col"> TERCERA_ENTREGA </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.TERCERA_ENTREGA}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FT_03">
+      <th mat-header-cell *matHeaderCellDef scope="col"> FT_03 </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.FT_03}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CUARTA_ENTREGA">
+      <th mat-header-cell *matHeaderCellDef scope="col"> CUARTA_ENTREGA </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.CUARTA_ENTREGA}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FT_04">
+      <th mat-header-cell *matHeaderCellDef scope="col"> FT_04 </th>
+      <td mat-cell *matCellDef="let Canasto"> {{Canasto.FT_04}} </td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let Canasto">
+        <mat-icon aria-hidden="false" aria-label="}">
+          create
+        </mat-icon>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+
+  </table>
+  <mat-paginator [pageIndex]="0" [pageSize]="100" [pageSizeOptions]="[100, 150, 200, 250, 300]">
+  </mat-paginator>
+  <div>
+    <!-- <button type="button" (click)="imprimirLista()">Generar Pdf</button> -->
+  </div>
+</div>
+<div *ngIf="ban">
+
+</div>

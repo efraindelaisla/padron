@@ -1,0 +1,19 @@
+.toolbar {
+  margin-right: 100px;
+}
+
+.editar {
+  width: 20%;
+
+}
+
+table {
+  width: 300%;
+}
+
+
+.table > tbody > tr:hover {
+  background-color: #F2F2F2;
+  cursor: pointer;
+}
+
